@@ -16,6 +16,14 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 ENV PATH $PATH:/composer/vendor/bin
 
+# Node.js install
+ARG NODE_VERSION=20.x
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION | bash - \
+  && apt-get update \
+  && apt-get install -y nodejs \
+  && apt-get clean \
+  && npm install -g npm@10.2.4
+
 # WorkDir Path setting
 WORKDIR /var/www
 
